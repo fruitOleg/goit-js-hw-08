@@ -11,13 +11,13 @@ formEl.addEventListener('input', throttle(inputFeedbackForm, 500));
 saveDataUser();
 
 function submitUserForm(evt) {
-  evt.preventDefault();
   if (formEmailEl.value == null || formTextEl.value == null) {
-    evt.currentTarget.reset();
-    localStorage.removeItem('feedback-form-state');
+    localStorage.clear();
     return;
   }
-  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+  evt.preventDefault();
+  // console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+  localStorage.clear();
 }
 
 function inputFeedbackForm(evt) {
