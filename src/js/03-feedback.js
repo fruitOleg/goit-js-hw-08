@@ -10,19 +10,6 @@ formEl.addEventListener('input', throttle(inputFeedbackForm, 500));
 
 saveDataUser();
 
-function submitUserForm(evt) {
-  evt.preventDefault();
-  const emailUser = evt.target.email.value;
-  const textUser = evt.target.message.value;
-
-  if (emailUser === '' || textUser === '') {
-    return false;
-  }
-  evt.target.reset();
-  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
-  localStorage.removeItem('feedback-form-state');
-}
-
 function inputFeedbackForm(evt) {
   dataForm[evt.target.name] = evt.target.value;
 
@@ -32,8 +19,24 @@ function inputFeedbackForm(evt) {
 function saveDataUser() {
   const saveData = JSON.parse(localStorage.getItem('feedback-form-state'));
 
-  if (saveData) {
-    formEmailEl.value = saveData.email || '';
-    formTextEl.value = saveData.message || '';
+  if (saveData.email) {
+    formEmailEl.value = saveData.email || ' ';
   }
+  if (saveData.message) {
+    formTextEl.value = saveData.message || ' ';
+  }
+}
+
+function submitUserForm(evt) {
+  evt.preventDefault();
+
+  const emailUser = evt.target.email.value;
+  const textUser = evt.target.message.value;
+
+  if (emailUser === '' || textUser === '') {
+    return false;
+  }
+  evt.target.reset();
+  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+  localStorage.removeItem('feedback-form-state');
 }
