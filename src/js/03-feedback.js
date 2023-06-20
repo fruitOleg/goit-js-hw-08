@@ -12,12 +12,12 @@ saveDataUser();
 
 function submitUserForm(evt) {
   evt.preventDefault();
-  if (formEmailEl === '' && formTextEl === '') {
-    return false;
+  if (formEmailEl.value === '' && formTextEl.value === '') {
+    localStorage.removeItem('feedback-form-state');
+    return;
   }
-
+  evt.currentTarget.reset();
   console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
-  evt.target.reset();
   localStorage.removeItem('feedback-form-state');
 }
 
