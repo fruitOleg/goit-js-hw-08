@@ -12,11 +12,13 @@ saveDataUser();
 
 function submitUserForm(evt) {
   evt.preventDefault();
-  if (formEmailEl.value === '' && formTextEl.value === '') {
-    localStorage.removeItem('feedback-form-state');
-    return;
+  const emailUser = evt.target.email.value;
+  const textUser = evt.target.message.value;
+
+  if (emailUser === '' || textUser === '') {
+    return false;
   }
-  evt.currentTarget.reset();
+  evt.target.reset();
   console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
   localStorage.removeItem('feedback-form-state');
 }
