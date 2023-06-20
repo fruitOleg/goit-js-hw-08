@@ -12,11 +12,12 @@ saveDataUser();
 
 function submitUserForm(evt) {
   evt.preventDefault();
-
+  if (formEmailEl.value == null || formTextEl.value == null) {
+    evt.currentTarget.reset();
+    localStorage.removeItem('feedback-form-state');
+    return;
+  }
   console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
-
-  evt.currentTarget.reset();
-  localStorage.removeItem('feedback-form-state');
 }
 
 function inputFeedbackForm(evt) {

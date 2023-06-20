@@ -8,7 +8,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 // console.log(galleryItems);
 const listGallery = document.querySelector('.gallery');
 listGallery.style.listStyle = 'none';
-listGallery.addEventListener('click', showPicture);
+listGallery.addEventListener('click', lightbox);
 
 const createCardPicture = galleryItems.map(
   ({ preview, original, description }) => {
@@ -27,15 +27,15 @@ const createCardPicture = galleryItems.map(
 );
 
 listGallery.insertAdjacentHTML('beforeend', createCardPicture.join(''));
-function showPicture(evt) {
-  evt.preventDefault();
-
-  const isGalleyImg = evt.target.classList.contains('gallery__image');
-
-  if (!isGalleyImg) {
-    return;
-  }
-}
+// function showPicture(evt) {
+//   evt.preventDefault();
+//
+//   const isGalleyImg = evt.target.classList.contains('gallery__image');
+//
+//   if (!isGalleyImg) {
+//     return;
+//   }
+// }
 var lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionsDelay: 250,
