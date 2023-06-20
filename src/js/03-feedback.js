@@ -11,13 +11,14 @@ formEl.addEventListener('input', throttle(inputFeedbackForm, 500));
 saveDataUser();
 
 function submitUserForm(evt) {
-  if (formEmailEl.value == null || formTextEl.value == null) {
-    localStorage.clear();
-    return;
-  }
   evt.preventDefault();
-  // console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
-  localStorage.clear();
+  if (formEmailEl === '' && formTextEl === '') {
+    return false;
+  }
+
+  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+  evt.target.reset();
+  localStorage.removeItem('feedback-form-state');
 }
 
 function inputFeedbackForm(evt) {
