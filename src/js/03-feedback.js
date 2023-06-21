@@ -1,9 +1,8 @@
 import throttle from 'lodash.throttle';
 const STORAGE_KEY = 'feedback-form-state';
 const formEl = document.querySelector('.feedback-form');
-const formEmailEl = document.getElementsByName('email');
-const formTextEl = document.getElementsByName('message');
-const dataForm = {};
+
+let dataForm = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
 formEl.addEventListener('submit', submitUserForm);
 formEl.addEventListener('input', throttle(inputFeedbackForm, 500));
@@ -18,23 +17,25 @@ function inputFeedbackForm(evt) {
 
 function saveDataUser() {
   const saveData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  const { email, message } = formEl.elements;
 
   if (saveData) {
-    formEmailEl.value = saveData.email || '';
-    formTextEl.value = saveData.message || '';
+    email.value = saveData.email || '';
+    message.value = saveData.message || '';
   }
 }
 
 function submitUserForm(evt) {
   evt.preventDefault();
 
-  const emailUser = evt.target.email.value;
-  const textUser = evt.target.message.value;
+  const { email, message } = evt.target.elements;
 
-  if (emailUser === '' || textUser === '') {
-    return false;
+  if (email.value === '' || message.value === '') {
+    alert('Не всі поля заповнені!');
+    return;
   }
   evt.target.reset();
-  console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+  console.log(dataForm);
   localStorage.removeItem(STORAGE_KEY);
+  dataForm = {};
 }
